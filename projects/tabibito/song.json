@@ -2,8 +2,8 @@
  "title": "旅人の唄",
  "artist": "大原ゆい子",
  "audio": "audio/song.mp3",
- "bpm": 120,
- "phase": 0,
+ "bpm": 137.01,
+ "phase": 0.43,
  "meter": 4,
  "dur": 264.1,
  "fadeOut": 5,
@@ -11,5 +11,6 @@
   "scenes.js",
   "story.js"
  ],
- "fontSample": "旅人の唄たびびとのうた大原ゆい子作詞作曲歌編曲中文翻譯"
+ "fontSample": "旅人の唄たびびとのうた大原ゆい子作詞作曲歌編曲中文翻譯",
+ "fullDuration": 264.12
 }

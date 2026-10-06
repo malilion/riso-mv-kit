@@ -4,7 +4,7 @@
 # song is ~13 GB of frames): render a chunk -> encode it (same x264 settings) -> delete its frames -> next.
 # Then the chunks are joined without re-encoding, the song is added with a fade-out, and a smaller copy is made:
 #   video/PROJECT.mp4 (master)   video/PROJECT_share.mp4 (~6 Mbps, easier to send)
-# Resumable: finished chunks are kept and skipped. Needs: node tools/server.mjs running.
+# Resumable: finished chunks are kept and skipped. Needs: node tools/server.mjs running (PORT=8767 to use another port).
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 P=${1:?usage: tools/render_chunks.sh PROJECT [chunk_seconds]}; CS=${2:-100}
@@ -19,7 +19,7 @@ for ((a = 0, k = 0; a < TOTAL; a += STEP, k++)); do
   echo "file '$ROOT/$CH/$name.mp4'" >> $CH/list.txt
   if [ -f $CH/$name.mp4 ]; then echo "chunk $name already encoded"; continue; fi
   echo "== chunk $name: frames $a..$((z - 1))"
-  node tools/render.mjs --project=$P --range=$(echo "$a / 30" | bc -l):$(echo "$z / 30" | bc -l) --workers=4 --out=$FR 2>&1 | tail -2
+  node tools/render.mjs --project=$P --range=$(echo "$a / 30" | bc -l):$(echo "$z / 30" | bc -l) --workers=4 --out=$FR ${PORT:+--port=$PORT} 2>&1 | tail -2
   for ((i = a; i < z; i++)); do [ -s $FR/$(printf '%05d' $i).jpg ] || { echo "missing frame $i"; exit 1; }; done
   ffmpeg -v error -y -framerate 30 -start_number $a -i $FR/%05d.jpg -frames:v $((z - a)) "${VOPT[@]}" $CH/$name.mp4.tmp.mp4 && mv $CH/$name.mp4.tmp.mp4 $CH/$name.mp4
   for ((i = a; i < z; i++)); do rm -f $FR/$(printf '%05d' $i).jpg; done

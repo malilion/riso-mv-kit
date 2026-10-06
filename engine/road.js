@@ -28,7 +28,7 @@ const ROAD = (() => {
   const field = (i, zone) => CROPS[Math.floor(hash(Math.floor((i + zone * 5) / 13) + 7, zone + 9) * CROPS.length)];
   const ZONES = [2.2, 6.5, 14, 0];   // field strip boundaries in road half-widths from the edge; 0 = to the horizon
 
-  // o: { z (camera world z), camH, fov, hor (horizon px), walk: {ahead, ph, s, looks}, haze }
+  // o: { z (camera world z), camH, fov, hor (horizon px), walk: {ahead, ph, s, looks (one look = a lone walker)}, haze }
   function render(P, t, o) {
     const camZ = o.z, depth = 1 / Math.tan((o.fov || 62) / 2 * Math.PI / 180), hor = o.hor ?? H * .42, F2 = W / 2;
     const inkAt = n => o.blank ? 1 - smooth(inv(o.blank[0], o.blank[1], n / DRAW)) : 1;   // 0 = unprinted paper
@@ -92,7 +92,8 @@ const ROAD = (() => {
       }
       if (wz >= 0 && Math.floor(wz / SEG) === (n0 + g.n)) {
         const u = (wz % SEG) / SEG, nx = list[k + 1] ? list[k + 1].p1 : g.p2, wx = lerp(p1.x, nx.x, u), wy = lerp(p1.y, nx.y, u), wk = lerp(p1.k, nx.k, u) * F2;
-        pair(P, wx + (o.walk.dx || 0) * wk, wy, (o.walk.h || 560) * wk, o.walk.ph, t, o.walk.looks);
+        if (o.walk.looks.length > 1) pair(P, wx + (o.walk.dx || 0) * wk, wy, (o.walk.h || 560) * wk, o.walk.ph, t, o.walk.looks);
+        else walker(P, wx + (o.walk.dx || 0) * wk, wy, (o.walk.h || 560) * wk, o.walk.ph, o.walk.looks[0], t);   // a lone traveller
         if (o.walk.after) o.walk.after(P, wx, wy, wk);
       }
       P.restore();
