@@ -1,0 +1,20 @@
+{
+  "name": "riso-mv-kit",
+  "version": "1.0.0",
+  "description": "Riso-print picture-book music videos, drawn by code and rendered frame by frame in headless Chrome",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "serve": "node tools/server.mjs",
+    "new": "zsh tools/new_project.sh",
+    "analyze": "node tools/analyze.mjs",
+    "lyrics": "node tools/make_lyrics.mjs",
+    "render": "node tools/render.mjs",
+    "chunks": "zsh tools/render_chunks.sh"
+  },
+  "keywords": ["music-video", "risograph", "halftone", "canvas", "webgl", "picture-book", "lyrics"],
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}

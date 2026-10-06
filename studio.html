@@ -1,0 +1,56 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>riso-mv-kit studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=LXGW+WenKai+TC:wght@400;700&display=block" rel="stylesheet">
+<style>html,body{margin:0;background:#1d1c1a;overflow:hidden} #out{display:block;width:min(100vw,177.78vh);height:min(56.25vw,100vh);margin:auto} #hud{position:fixed;left:8px;bottom:8px;color:#fff;font:12px monospace;text-shadow:0 0 3px #000}</style>
+</head><body>
+<canvas id="out"></canvas><div id="hud"></div>
+<script src="engine/core.js"></script>
+<script src="engine/riso.js"></script>
+<script src="engine/draw.js"></script>
+<script src="engine/road.js"></script>
+<script src="engine/plant.js"></script>
+<script src="engine/type.js"></script>
+<script src="engine/transitions.js"></script>
+<script src="engine/lyrics.js"></script>
+<script src="engine/kit.js"></script>
+<script src="engine/timeline.js"></script>
+<script>
+// studio.html?project=NAME            interactive preview of projects/NAME (click to play with audio)
+//   &play &from=30                    play from 30 s       &t=12.3   show one frame
+//   &scene=sc_rays&t=3                one scene alone, its start at 0 (for designing a scene)
+const qs = new URLSearchParams(location.search), PROJECT = qs.get('project') || 'mebuki', BASE = `projects/${PROJECT}/`;
+const getJSON = async u => { try { const r = await fetch(u, { cache: 'no-store' }); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+const loadScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src + '?v=' + Date.now(); s.onload = res; s.onerror = () => rej(new Error('cannot load ' + src)); document.body.appendChild(s); });
+window.ready = (async () => {
+  const cfg = (await getJSON(BASE + 'song.json')) || {};
+  Object.assign(SONG, cfg); SONG.audio = BASE + (cfg.audio || 'audio/song.mp3');
+  for (const s of cfg.scripts || ['scenes.js', 'story.js']) await loadScript(BASE + s);
+  const ly = (await getJSON(BASE + 'lyrics.json')) || (await getJSON(BASE + 'lyrics.sample.json')); if (ly && Array.isArray(ly.lines)) LY = ly.lines;
+  const sample = (cfg.title || '') + 'あいうえおアイウエオ一二三0123456789、。「」おわりつづく' + LY.map(l => (l.ja || '') + (l.zh || '')).join('') + (cfg.fontSample || '');
+  // fonts come from Google Fonts; a flaky request is retried rather than failing the whole render
+  for (let i = 0; ; i++) {
+    try { await Promise.all(['600 40px "Klee One"', '400 40px "Klee One"', '700 40px "LXGW WenKai TC"', '400 40px "LXGW WenKai TC"'].map(f => document.fonts.load(f, sample))); break; }
+    catch (e) { if (i >= 5) throw e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+  }
+  await document.fonts.ready;
+  buildTimeline();
+  const one = qs.get('scene'); if (one && window[one]) TL = [{ t: 0, fn: window[one], tr: null }];
+  return true;
+})();
+const outCv = document.getElementById('out'); outCv.width = W; outCv.height = H; const outCx = outCv.getContext('2d');
+window.renderFrame = async (t, fmt) => {
+  await window.ready;
+  await drawTimeline(outCx, t);
+  if (fmt) return outCv.toDataURL(fmt, 0.93);
+};
+const hud = document.getElementById('hud');
+if (qs.has('t')) window.renderFrame(parseFloat(qs.get('t'))).then(() => hud.textContent = 't=' + qs.get('t'));
+if (qs.has('play')) {
+  hud.textContent = 'click to play';
+  document.body.onclick = async () => {
+    await window.ready; const a = new Audio(SONG.audio); a.currentTime = parseFloat(qs.get('from') || 0); a.play();
+    (async function loop() { await window.renderFrame(a.currentTime); hud.textContent = a.currentTime.toFixed(2); if (!a.paused) requestAnimationFrame(loop); })();
+  };
+}
+</script></body></html>

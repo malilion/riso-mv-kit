@@ -1,0 +1,7 @@
+{"note": "placeholder text for layout tests; replaced by lyrics.json once you time your own lyrics",
+ "lines": [
+  {"t0": 8.0, "t1": 14.5, "ja": "ここに 一行目が入ります", "zh": "這裡會顯示第一句的翻譯", "sing": 1},
+  {"t0": 16.0, "t1": 22.5, "ja": "二行目は ここに出ます", "zh": "這裡會顯示第二句的翻譯", "sing": 1, "parts": [[16.0, 18.8], [19.6, 22.5]]},
+  {"t0": 24.5, "t1": 30.0, "ja": "雨の日の 見本です", "zh": "下雨天的範例", "sing": 1},
+  {"t0": 40.5, "t1": 46.0, "ja": "ちいさな芽の 見本です", "zh": "小小新芽的範例", "sing": 1}
+ ]}

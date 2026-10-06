@@ -1,0 +1,18 @@
+{
+ "title": "芽吹の唄",
+ "artist": "大原ゆい子",
+ "audio": "audio/song.mp3",
+ "bpm": 137,
+ "phase": 0.948,
+ "meter": 4,
+ "dur": 313.7,
+ "fadeOut": 5,
+ "pilotDur": 92,
+ "fullDuration": 313.748,
+ "scripts": [
+  "scenes.js",
+  "scenes2.js",
+  "story.js"
+ ],
+ "fontSample": "芽吹の唄めぶきのうた大原ゆい子作詞作曲歌編曲中文翻譯巴哈姆特"
+}

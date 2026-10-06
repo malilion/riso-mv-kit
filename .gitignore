@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+
+# songs and lyrics are copyrighted: they stay on your computer
+projects/*/audio/*
+!projects/*/audio/.gitkeep
+projects/*/lyrics.txt
+projects/*/lyrics.json
+projects/*/analysis.json
+
+# render outputs (large, and they contain the song and lyrics)
+out/
+video/
+qa/
+*.mp4
+*.mp3
+*.m4a
+*.wav
+*.flac

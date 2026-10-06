@@ -1,0 +1,12 @@
+{
+ "title": "新的歌",
+ "artist": "歌手名",
+ "audio": "audio/song.mp3",
+ "bpm": 120,
+ "phase": 0,
+ "meter": 4,
+ "dur": 64,
+ "fadeOut": 3,
+ "scripts": ["scenes.js", "story.js"],
+ "fontSample": ""
+}
