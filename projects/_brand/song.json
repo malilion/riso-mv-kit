@@ -1,0 +1,10 @@
+{
+ "title": "riso-mv-kit",
+ "bpm": 120,
+ "phase": 0,
+ "meter": 4,
+ "dur": 4,
+ "fadeOut": 0,
+ "scripts": ["scenes.js", "story.js"],
+ "fontSample": "riso-mv-kit孔版印刷風的繪本工具包Riso-print picture-book music videos, drawn by code"
+}
