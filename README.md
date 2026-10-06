@@ -95,4 +95,4 @@ node tools/server.mjs
 
 ## 來源與授權
 
-ISC License。逐格渲染加 FFmpeg 合成的流程，參考自 [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version) 與 [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo)（皆為 ISC），原授權聲明保留在 [LICENSE](LICENSE)。引擎、場景和工具由 Claude（Anthropic）與 malilion 一起製作。字型使用 Google Fonts 的 Klee One 與 LXGW WenKai TC（SIL OFL）。
+ISC License。逐格渲染加 FFmpeg 合成的流程，參考自 [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version)（ISC）與 [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo)（package.json 標示 ISC），原授權聲明保留在 [LICENSE](LICENSE)。引擎、場景和工具由 Claude（Anthropic）與 malilion 一起製作。字型使用 Google Fonts 的 Klee One 與 LXGW WenKai TC（SIL OFL）。

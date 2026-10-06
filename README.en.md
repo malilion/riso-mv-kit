@@ -99,4 +99,4 @@ Songs, lyrics and translations belong to their authors and are **never** committ
 
 ## Credits and license
 
-ISC License. The render-in-Chrome-then-encode-with-FFmpeg approach comes from [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version) and [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo) (both ISC); their notices are kept in [LICENSE](LICENSE). The engine, scenes and tools were made by Claude (Anthropic) together with malilion. Fonts: Klee One and LXGW WenKai TC from Google Fonts (SIL OFL).
+ISC License. The render-in-Chrome-then-encode-with-FFmpeg approach comes from [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version) (ISC) and [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo) (ISC as declared in its package.json); their notices are kept in [LICENSE](LICENSE). The engine, scenes and tools were made by Claude (Anthropic) together with malilion. Fonts: Klee One and LXGW WenKai TC from Google Fonts (SIL OFL).
