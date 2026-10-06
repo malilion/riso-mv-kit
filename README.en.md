@@ -12,7 +12,22 @@
 
 Every frame is drawn by code, rendered one by one in headless Chrome, and joined with the music into a video.
 
-The first video made with it is an MV for 「芽吹の唄」 (Mushoku Tensei season 3, second opening): 5:14, 1080p, 30 fps. Its storyboard and all of its scenes live in [`projects/mebuki/`](projects/mebuki/README.en.md) as a complete example.
+Two MVs have been made with it so far; their storyboards and all of their scenes live in `projects/` as complete examples.
+
+## Works
+
+Highlights from both MVs, **without sound and without lyrics** (the songs and lyrics belong to their authors and are not in this repo). Click a picture for a sharper mp4.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="assets/previews/mebuki.mp4"><img src="assets/previews/mebuki.webp" alt="「芽吹の唄」 MV highlights (silent, no lyrics)"></a></td>
+<td width="50%" valign="top"><a href="assets/previews/tabibito.mp4"><img src="assets/previews/tabibito.webp" alt="「旅人の唄」 MV highlights (silent, no lyrics)"></a></td>
+</tr>
+<tr>
+<td valign="top"><b>「芽吹の唄」</b> (Mushoku Tensei S3, second opening)<br>5:14. Two travellers in a paper world that sprouts: a country road, a clock-world, a whole field popping up on the downbeat.<br><a href="projects/mebuki/README.en.md">Storyboard and code →</a></td>
+<td valign="top"><b>「旅人の唄」</b> (Mushoku Tensei S1 ending)<br>4:24. One traveller and a small bird: a mountain, a spring, an island above the clouds, a campfire dream, a pinky promise, lanterns.<br><a href="projects/tabibito/README.en.md">Storyboard and code →</a></td>
+</tr>
+</table>
 
 ## Features
 
@@ -59,6 +74,8 @@ Put the song at `projects/my-song/audio/song.mp3` and the lyrics in `projects/my
 4. **Preview**: `studio.html?project=my-song&play`
 5. **Render**: `./tools/render_chunks.sh my-song` renders, encodes and deletes frames in chunks so a full song never fills the disk. It writes `video/my-song.mp4` and a smaller `video/my-song_share.mp4`.
 
+To show your own work in a README, `tools/make_preview.sh` renders just the time ranges you pick, with the lyrics switched off and no music, and writes an mp4 plus an animated webp that are safe to commit.
+
 Step by step: **[docs/WORKFLOW.en.md](docs/WORKFLOW.en.md)**. How every technique works: **[docs/TECHNIQUES.en.md](docs/TECHNIQUES.en.md)**, covering the print engine, halftones, misregistration, animating on twos, seedling growth, the pseudo-3D road, vertical lyrics, page turns, the pencil fade, memory cards, tempo and vocal analysis, and reading timing from lyric videos.
 
 ## Layout
@@ -69,14 +86,16 @@ Step by step: **[docs/WORKFLOW.en.md](docs/WORKFLOW.en.md)**. How every techniqu
 | `projects/NAME/` | One MV: `song.json` settings, `timing.json` lyric times, `story.js` storyboard, `scenes.js` scenes |
 | `projects/_template/` | Starter project |
 | `projects/mebuki/` | The 「芽吹の唄」 example |
+| `projects/tabibito/` | The 「旅人の唄」 example (a single lead, timing from speech recognition) |
 | `projects/_brand/` | The repo icon and social preview (rebuild with `tools/make_brand.sh`) |
-| `tools/` | Server, renderer, chunked render, encode, tempo and vocal analysis, lyric tools, lyric-video scan |
+| `assets/previews/` | Highlights of the works (silent, no lyrics; made with `tools/make_preview.sh`) |
+| `tools/` | Server, renderer, chunked render, encode, highlight previews, tempo and vocal analysis, lyric tools, lyric-video scan |
 | `studio.html` | Preview and render page |
 | `timing.html` | Tap-along lyric timing tool (English / Chinese interface) |
 
 ## Copyright
 
-Songs, lyrics and translations belong to their authors and are **never** committed: `projects/*/audio/`, `lyrics.txt`, `lyrics.json` and every render output are in `.gitignore`. The example project keeps only code and numeric timings. To rebuild it you need your own legally obtained recording and lyrics. Check the rights before publishing a video that uses someone else's work.
+Songs, lyrics and translations belong to their authors and are **never** committed: `projects/*/audio/`, `lyrics.txt`, `lyrics.json` and every render output are in `.gitignore`. The example projects keep only code and numeric timings; the highlights in `assets/previews/` were rendered separately with the lyrics off and no music. To rebuild it you need your own legally obtained recording and lyrics. Check the rights before publishing a video that uses someone else's work.
 
 ## Credits and license
 

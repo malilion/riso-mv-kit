@@ -118,9 +118,9 @@ const MEMO = [['road', 12, 'sc_road', 7.95], ['clock', 31, 'sc_clock', 28.98], [
 
 async function sc_memories(P, t, t0, o = {}) {
   const lt = t - t0, B = beatLen();
-  window.NO_LYRICS = true;
+  const keep = window.NO_LYRICS; window.NO_LYRICS = true;   // the cards are lyric-free; restore whatever was set before (&nolyrics)
   const snaps = []; for (const [key, ts, fn, s0] of MEMO) snaps.push(await RISO.snapshot(key, async Q => { await window[fn](Q, ts, s0); }));
-  window.NO_LYRICS = false;
+  window.NO_LYRICS = keep;
   RISO.begin();
   P.add(FULL, { c: .1 }); const grid = new Path2D(); for (let x = 0; x <= W; x += 48) { grid.moveTo(x, 0); grid.lineTo(x, H); } P.stroke(grid, 'b', 1, .2);
   // a card every beat slides in from the right, lands on the pile, and is gone two beats later

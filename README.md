@@ -12,7 +12,22 @@
 
 用程式畫出每一格畫面，在 Chrome 裡逐格渲染，最後和音樂合成影片。
 
-第一支作品是「芽吹の唄」（《無職轉生》第三季 OP2）的 MV，5 分 14 秒、1080p、30 fps。完整的分鏡和場景程式都放在 [`projects/mebuki/`](projects/mebuki/)，可以當作範例參考。
+目前做了兩支 MV，完整的分鏡和場景程式都在 `projects/` 裡，可以當作範例參考。
+
+## 作品
+
+下面是兩支 MV 的精華片段，**沒有聲音、也沒有歌詞**（歌曲和歌詞的版權屬於原作者，不放進 repo）。點圖片可以看較清楚的 mp4 版本。
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="assets/previews/mebuki.mp4"><img src="assets/previews/mebuki.webp" alt="「芽吹の唄」MV 精華（無聲、無歌詞）"></a></td>
+<td width="50%" valign="top"><a href="assets/previews/tabibito.mp4"><img src="assets/previews/tabibito.webp" alt="「旅人の唄」MV 精華（無聲、無歌詞）"></a></td>
+</tr>
+<tr>
+<td valign="top"><b>「芽吹の唄」</b>（《無職轉生》第三季 OP2）<br>5:14。兩個旅人走在會發芽的紙上世界：鄉間路、時鐘小星球、整片田在重拍上冒芽。<br><a href="projects/mebuki/">分鏡與程式 →</a></td>
+<td valign="top"><b>「旅人の唄」</b>（《無職轉生》第一季 ED）<br>4:24。一個旅人和一隻小鳥：翻山、泉水、雲海上的浮島、營火的夢、打勾勾、天燈。<br><a href="projects/tabibito/">分鏡與程式 →</a></td>
+</tr>
+</table>
 
 ## 特色
 
@@ -55,6 +70,8 @@ node tools/server.mjs
 5. 分段渲染
 6. 合成影片
 
+想在 README 放自己的作品時，`tools/make_preview.sh` 會只渲染指定的幾段、關掉歌詞、不加音樂，輸出可以放進 repo 的 mp4 和會動的 webp。
+
 做法和原理寫在 **[docs/TECHNIQUES.md](docs/TECHNIQUES.md)**：印刷引擎、網點、套色錯位、一拍二、植物生長、偽 3D 道路、直書歌詞、翻頁、鉛筆稿淡出、回憶卡片、節奏與人聲分析、從歌詞影片讀時間等等。
 
 ## 資料夾
@@ -65,14 +82,16 @@ node tools/server.mjs
 | `projects/NAME/` | 一支 MV：`song.json` 設定、`timing.json` 歌詞時間、`story.js` 分鏡表、`scenes.js` 場景 |
 | `projects/_template/` | 開新專案用的範本 |
 | `projects/mebuki/` | 「芽吹の唄」完整範例 |
+| `projects/tabibito/` | 「旅人の唄」完整範例（單一主角、語音辨識對時間） |
 | `projects/_brand/` | repo 的 icon 和社群預覽圖（`tools/make_brand.sh` 重新產生） |
-| `tools/` | 伺服器、渲染、分段渲染、合成、節奏分析、人聲分析、歌詞合併、從歌詞影片讀時間 |
+| `assets/previews/` | 作品精華（無聲、無歌詞，`tools/make_preview.sh` 產生） |
+| `tools/` | 伺服器、渲染、分段渲染、合成、精華預覽、節奏分析、人聲分析、歌詞合併、從歌詞影片讀時間 |
 | `studio.html` | 預覽與渲染用的頁面 |
 | `timing.html` | 邊聽邊按空白鍵的對時間工具（中英介面切換） |
 
 ## 版權
 
-歌曲、歌詞和翻譯都有各自的版權，**不會**被放進這個 repo：`projects/*/audio/`、`lyrics.txt`、`lyrics.json` 和所有渲染輸出都已列在 `.gitignore`。範例專案只保留程式碼和純數字的時間表，要重現範例，需要自己準備合法取得的音源和歌詞。公開發布用到別人作品的影片前，請先確認授權。
+歌曲、歌詞和翻譯都有各自的版權，**不會**被放進這個 repo：`projects/*/audio/`、`lyrics.txt`、`lyrics.json` 和所有渲染輸出都已列在 `.gitignore`。範例專案只保留程式碼和純數字的時間表；`assets/previews/` 裡的精華片段是關掉歌詞、不含音樂另外渲染的。要重現範例，需要自己準備合法取得的音源和歌詞。公開發布用到別人作品的影片前，請先確認授權。
 
 ## 來源與授權
 

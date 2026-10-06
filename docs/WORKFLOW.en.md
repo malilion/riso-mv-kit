@@ -108,6 +108,21 @@ This only watches the video play; it never downloads it. Use it only on videos y
 **C. Write them yourself**
 Edit `timing.json` directly.
 
+**D. Speech recognition (when there is no lyric video)**
+Let [whisper.cpp](https://github.com/ggerganov/whisper.cpp) recognise the singing and take the time of every word. 「旅人の唄」 was timed this way, to about 0.1 s.
+
+```bash
+brew install whisper-cpp
+curl -L -o ggml-small.bin https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin
+ffmpeg -i projects/my-song/audio/song.mp3 -ar 16000 -ac 1 song16.wav
+whisper-cli -m ggml-small.bin -f song16.wav -l ja -dtw small -nfa -ojf -of words
+```
+
+- Always pass `-dtw small -nfa`. Without them a song with backing gives only rough times snapped to whole seconds; `-nfa` (flash attention off) is required for DTW to work.
+- Each word's `t_dtw` in `words.json` (in units of 0.01 s) is close to when that word starts. The recognised text is often wrong (homophones) but the times are right, so match positions against your own lyrics.
+- A line's `t0` is its first word and `t1` its last word plus a little for the held note; for lines with a space, fill `parts` from the words before and after the space.
+- Outros and instrumentals sometimes produce lines that are not there (hallucinations); skip anything that is not in the lyrics.
+
 Finally, merge everything into the `lyrics.json` that the studio reads:
 
 ```bash
@@ -187,6 +202,14 @@ node tools/render.mjs --project=my-song --range=0:90 --workers=4
 ```
 
 **Disk space**: each frame is about 1.3 MB, so a 5-minute song is about 13 GB of frames. Render whole songs in chunks.
+
+**A highlight preview for the README**:
+
+```bash
+./tools/make_preview.sh my-song "1:4.5 20:23.5 72.5:76"
+```
+
+Renders only the listed ranges (3–4 seconds each works well; include a page turn if you can) with `&nolyrics`, adds no music, joins them and writes `assets/previews/my-song.mp4` (960×540) plus `assets/previews/my-song.webp` (480×270, 12 drawings a second, the same rate the drawings change on twos), which plays inline on GitHub. Neither file contains the song or the lyrics, so both can be committed. Needs `img2webp` (`brew install webp`).
 
 **Speed**: on an M1 with 4 workers, 30 to 160 ms per frame, so a 5-minute song takes about 10 to 30 minutes.
 

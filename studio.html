@@ -19,7 +19,9 @@
 // studio.html?project=NAME            interactive preview of projects/NAME (click to play with audio)
 //   &play &from=30                    play from 30 s       &t=12.3   show one frame
 //   &scene=sc_rays&t=3                one scene alone, its start at 0 (for designing a scene)
+//   &nolyrics                         hide the lyrics (silent previews that carry no lyric text)
 const qs = new URLSearchParams(location.search), PROJECT = qs.get('project') || 'mebuki', BASE = `projects/${PROJECT}/`;
+if (qs.has('nolyrics')) window.NO_LYRICS = true;
 const getJSON = async u => { try { const r = await fetch(u, { cache: 'no-store' }); return r.ok ? await r.json() : null; } catch (e) { return null; } };
 const loadScript = src => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src + '?v=' + Date.now(); s.onload = res; s.onerror = () => rej(new Error('cannot load ' + src)); document.body.appendChild(s); });
 window.ready = (async () => {

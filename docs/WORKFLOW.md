@@ -108,6 +108,21 @@ node tools/make_lyrics.mjs my-song --extract
 **C. 自己寫**
 直接編輯 `timing.json`。
 
+**D. 語音辨識（沒有字幕影片時）**
+用 [whisper.cpp](https://github.com/ggerganov/whisper.cpp) 辨識歌聲，拿每個字的時間。「旅人の唄」就是這樣對的，誤差大約 0.1 秒。
+
+```bash
+brew install whisper-cpp
+curl -L -o ggml-small.bin https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin
+ffmpeg -i projects/my-song/audio/song.mp3 -ar 16000 -ac 1 song16.wav
+whisper-cli -m ggml-small.bin -f song16.wav -l ja -dtw small -nfa -ojf -of words
+```
+
+- 一定要加 `-dtw small -nfa`。不加的話，有伴奏的歌只會拿到整秒對齊的粗略時間；`-nfa`（關掉 flash attention）是 DTW 能運作的必要條件。
+- `words.json` 裡每個字的 `t_dtw`（單位 0.01 秒）大約是那個字開始唱的時間。辨識出的字常常寫錯（同音字），但時間是準的，所以拿你自己的歌詞去對位置就好。
+- 每句的 `t0` 取第一個字、`t1` 取最後一個字再加一點拖音；有空格的句子，用空格前後兩段的字填 `parts`。
+- 尾奏或間奏偶爾會冒出不存在的句子（幻聽），對照歌詞略過即可。
+
 最後合併成 studio 讀取的 `lyrics.json`：
 
 ```bash
@@ -184,6 +199,14 @@ node tools/render.mjs --project=my-song --range=0:90 --workers=4
 ```
 
 **硬碟**：每格約 1.3 MB，5 分鐘的歌約 13 GB，所以整首請用分段渲染。
+
+**放進 README 的精華預覽**：
+
+```bash
+./tools/make_preview.sh my-song "1:4.5 20:23.5 72.5:76"
+```
+
+只渲染列出的時間段（建議每段 3–4 秒，包含翻頁更好看），加上 `&nolyrics` 關掉歌詞、不加音樂，接起來輸出 `assets/previews/my-song.mp4`（960×540）和會在 GitHub 上直接播放的 `assets/previews/my-song.webp`（480×270、每秒 12 張，正好是一拍二的張數）。這兩個檔案不含歌曲和歌詞，可以放進 repo。需要 `img2webp`（`brew install webp`）。
 
 **速度**：M1、4 個渲染程序時，每格約 30 到 160 毫秒，5 分鐘的歌大約 10 到 30 分鐘。
 
