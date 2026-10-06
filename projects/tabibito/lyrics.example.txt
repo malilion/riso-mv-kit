@@ -1,0 +1,15 @@
+# 把這個檔案複製成 lyrics.txt，然後把歌詞貼在下面（# 開頭的行會被忽略）。
+# Copy this file to lyrics.txt and paste the lyrics below (lines starting with # are ignored).
+#
+# 每句一行日文；中文翻譯放在下一行。羅馬拼音行、作詞作曲等資訊行會自動略過。
+# One Japanese line per lyric line, with its translation on the next line. Romaji lines and
+# credit lines (lyricist, composer, ...) are skipped automatically.
+#
+# lyrics.txt 和 lyrics.json 都在 .gitignore 裡，不會被推上 GitHub（歌詞有版權）。
+# lyrics.txt and lyrics.json are in .gitignore and never go to GitHub (lyrics are copyrighted).
+#
+# 範例（自己寫的句子，不是歌詞） / example (made-up lines, not real lyrics):
+ここに 一行目が入ります
+這裡放第一句的翻譯
+二行目は ここです
+這裡放第二句的翻譯

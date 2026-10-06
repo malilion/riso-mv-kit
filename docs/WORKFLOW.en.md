@@ -79,7 +79,7 @@ The format of `timing.json`:
 Three ways to get the times:
 
 **A. Tap along (most accurate, takes a few minutes)**
-Open <http://localhost:8766/timing.html?project=my-song>. Hold space as soon as a line starts and release it when the line ends. Each line is saved to `lyrics.json` as soon as you finish it. When you are done, run this to copy the numbers into `timing.json` so they can live in the repo:
+Open <http://localhost:8766/timing.html?project=my-song>. Hold space as soon as a line starts and release it when the line ends. The interface switches between English and Chinese with the language button at the right end of the toolbar, or add `&lang=en` / `&lang=zh` to the URL. Each line is saved to `lyrics.json` as soon as you finish it. When you are done, run this to copy the numbers into `timing.json` so they can live in the repo:
 
 ```bash
 node tools/make_lyrics.mjs my-song --extract

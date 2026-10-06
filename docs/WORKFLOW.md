@@ -79,7 +79,7 @@ node tools/analyze.mjs my-song 137
 取得時間的三種方法：
 
 **A. 邊聽邊按（最準，大約幾分鐘）**
-打開 <http://localhost:8766/timing.html?project=my-song>，每句一開始唱就按住空白鍵、唱完放開。每對完一句會自動存成 `lyrics.json`。對完後執行下面這行，把時間抽出成 `timing.json`，數字就能留在 repo 裡：
+打開 <http://localhost:8766/timing.html?project=my-song>，每句一開始唱就按住空白鍵、唱完放開。介面可以切換中英文：按工具列最右邊的語言按鈕，或在網址加上 `&lang=en`。每對完一句會自動存成 `lyrics.json`。對完後執行下面這行，把時間抽出成 `timing.json`，數字就能留在 repo 裡：
 
 ```bash
 node tools/make_lyrics.mjs my-song --extract

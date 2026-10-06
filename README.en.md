@@ -72,7 +72,7 @@ Step by step: **[docs/WORKFLOW.en.md](docs/WORKFLOW.en.md)**. How every techniqu
 | `projects/_brand/` | The repo icon and social preview (rebuild with `tools/make_brand.sh`) |
 | `tools/` | Server, renderer, chunked render, encode, tempo and vocal analysis, lyric tools, lyric-video scan |
 | `studio.html` | Preview and render page |
-| `timing.html` | Tap-along lyric timing tool |
+| `timing.html` | Tap-along lyric timing tool (English / Chinese interface) |
 
 ## Copyright
 

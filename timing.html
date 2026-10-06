@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>歌詞對時間 · riso-mv-kit</title>
+<title>riso-mv-kit · timing</title>
 <link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&family=LXGW+WenKai+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#F4EEE1;--ink:#2E3B37;--green:#67B346;--pink:#F984CA;--blue:#62A8E5;--yellow:#FFE800;--mute:#8A8A80}
@@ -18,21 +18,59 @@ td.idx{color:var(--mute);width:28px} td.t input{width:72px;font:13px ui-monospac
 td.ja input{width:100%;font:600 17px "Klee One",serif;border:1px solid transparent;background:transparent} td.zh input{width:100%;border:1px solid transparent;background:transparent;font:inherit}
 td.ja input:focus,td.zh input:focus{border-color:#bbb;background:#fff} .empty{padding:30px 20px;color:#a33}
 </style></head><body>
-<header><h1 id="title">歌詞對時間</h1>
-<p class="help">按 <kbd>播放</kbd> 後，每句歌詞<b>一開始唱就按住</b> <kbd>空白鍵</kbd>，<b>唱完放開</b>，會自動跳到下一句。點某一行可以從那句重錄；時間也能直接改數字。每對完一句都會<b>自動存檔</b>。</p></header>
+<header><h1 id="title"></h1>
+<p class="help" data-i18n-html="help"></p></header>
 <div class="bar">
-  <button id="play">▶ 播放</button><button id="back">⟲ 2 秒</button><button id="fwd">2 秒 ⟳</button>
-  <span>速度</span><button data-rate=".6">0.6×</button><button data-rate=".8">0.8×</button><button data-rate="1" class="on">1×</button>
+  <button id="play"></button><button id="back" data-i18n="back"></button><button id="fwd" data-i18n="fwd"></button>
+  <span data-i18n="speed"></span><button data-rate=".6">0.6×</button><button data-rate=".8">0.8×</button><button data-rate="1" class="on">1×</button>
   <span id="time">0:00.00</span><span><span id="rec"></span><span id="cur"></span></span>
-  <span style="flex:1"></span><span>反應補償</span><input id="lag" type="number" step=".02" value=".12" style="width:64px"> 秒
-  <button id="reimport">從 lyrics.txt 重新匯入</button><button id="save" class="primary">儲存</button><span id="status"></span>
+  <span style="flex:1"></span><span data-i18n="lag"></span><input id="lag" type="number" step=".02" value=".12" style="width:64px"> <span data-i18n="sec"></span>
+  <button id="reimport" data-i18n="reimport"></button><button id="save" class="primary" data-i18n="save"></button><span id="status"></span><button id="lang" title="中文 / English"></button>
 </div>
 <div class="waves"><canvas id="overview" height="70"></canvas><canvas id="detail" height="160"></canvas></div>
 <div id="msg"></div>
-<table><thead><tr><th>#</th><th>開始</th><th>結束</th><th></th><th>日文</th><th>中文</th></tr></thead><tbody id="rows"></tbody></table>
-<script src="js/lyrics.js"></script>
+<table><thead><tr><th>#</th><th data-i18n="thStart"></th><th data-i18n="thEnd"></th><th></th><th data-i18n="thJa"></th><th data-i18n="thZh"></th></tr></thead><tbody id="rows"></tbody></table>
+<script src="engine/lyrics.js"></script>
 <script>
 const $ = s => document.querySelector(s);
+// ---- interface language: ?lang=zh|en, else the last choice, else the browser's language
+const I18N = {
+  zh: { htmlLang: 'zh-Hant', other: 'English', title: '歌詞對時間',
+    help: '按 <kbd>播放</kbd> 後，每句歌詞<b>一開始唱就按住</b> <kbd>空白鍵</kbd>，<b>唱完放開</b>，會自動跳到下一句。點某一行可以從那句重錄；時間也能直接改數字。每對完一句都會<b>自動存檔</b>。',
+    play: '▶ 播放', pause: '❚❚ 暫停', back: '⟲ 2 秒', fwd: '2 秒 ⟳', speed: '速度', lag: '反應補償', sec: '秒', reimport: '從 lyrics.txt 重新匯入', save: '儲存',
+    thStart: '開始', thEnd: '結束', thJa: '日文', thZh: '中文',
+    curLine: (n, s) => `第 ${n} 句：${s}`, allDone: '全部完成 ✓',
+    autosaved: (n, all) => `已自動儲存 ✓ ${n}/${all}`, autosaveNoResp: '⚠ 自動儲存失敗：伺服器沒有回應', autosaveDown: '⚠ 自動儲存失敗：伺服器沒有開（進度暫存在這個瀏覽器）',
+    noAudio: (f, p) => `找不到音訊檔 <b>${f}</b>：請把歌曲放到 projects/${p}/audio/，並在 song.json 設定檔名。`,
+    noLyrics: p => `lyrics.txt 裡還沒有歌詞：把歌詞貼進 projects/${p}/lyrics.txt 存檔後，按「從 lyrics.txt 重新匯入」。`,
+    confirmUntimed: n => `第 ${n} 句還沒有時間，確定要先存嗎？`, saved: tm => `已儲存 ✓ ${tm}`, saveFailed: '儲存失敗',
+    rescued: n => `已從這個瀏覽器救回 ${n} 句`, loaded: (n, all) => `已載入 lyrics.json（${n}/${all} 句有時間）` },
+  en: { htmlLang: 'en', other: '中文', title: 'Lyric timing',
+    help: 'Press <kbd>Play</kbd>, then <b>hold</b> <kbd>Space</kbd> <b>as soon as a line starts</b> and <b>release it when the line ends</b>; it moves on to the next line by itself. Click a row to redo from that line, or type the numbers in. Every finished line is <b>saved automatically</b>.',
+    play: '▶ Play', pause: '❚❚ Pause', back: '⟲ 2 s', fwd: '2 s ⟳', speed: 'Speed', lag: 'Reaction offset', sec: 's', reimport: 'Re-import lyrics.txt', save: 'Save',
+    thStart: 'Start', thEnd: 'End', thJa: 'Lyrics', thZh: 'Translation',
+    curLine: (n, s) => `Line ${n}: ${s}`, allDone: 'All lines timed ✓',
+    autosaved: (n, all) => `Saved automatically ✓ ${n}/${all}`, autosaveNoResp: '⚠ Autosave failed: the server did not respond', autosaveDown: '⚠ Autosave failed: the server is not running (progress is kept in this browser)',
+    noAudio: (f, p) => `Audio file not found: <b>${f}</b>. Put the song in projects/${p}/audio/ and set its file name in song.json.`,
+    noLyrics: p => `No lyrics in lyrics.txt yet: paste them into projects/${p}/lyrics.txt, save it, then press "Re-import lyrics.txt".`,
+    confirmUntimed: n => `Line ${n} has no time yet. Save anyway?`, saved: tm => `Saved ✓ ${tm}`, saveFailed: 'Save failed',
+    rescued: n => `Recovered ${n} lines from this browser`, loaded: (n, all) => `Loaded lyrics.json (${n}/${all} lines timed)` },
+};
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+let LANG = (q => q === 'zh' || q === 'en' ? q : store('timing-lang') || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'))(new URLSearchParams(location.search).get('lang'));
+const tr = (k, ...a) => { const v = I18N[LANG][k]; return typeof v === 'function' ? v(...a) : v; };
+// status and message lines remember what they say, so switching language re-words them
+let lastStatus = null, lastMsg = null;
+function setStatus(k, ...a) { lastStatus = k ? [k, a] : null; $('#status').textContent = k ? tr(k, ...a) : ''; }
+function setMsg(k, ...a) { lastMsg = k ? [k, a] : null; $('#msg').innerHTML = k ? `<p class="empty">${tr(k, ...a)}</p>` : ''; }
+function applyLang() {
+  document.documentElement.lang = tr('htmlLang');
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = tr(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-html]').forEach(el => el.innerHTML = tr(el.dataset.i18nHtml));
+  $('#lang').textContent = tr('other'); $('#title').textContent = tr('title') + ' · ' + (song.title || PROJECT); document.title = $('#title').textContent;
+  if (lastStatus) setStatus(lastStatus[0], ...lastStatus[1]); if (lastMsg) setMsg(lastMsg[0], ...lastMsg[1]);
+  if (typeof render === 'function' && lines.length) render();
+}
 const fmt = t => { if (!(t >= 0)) return '–'; const m = Math.floor(t / 60), s = t - m * 60; return `${m}:${s.toFixed(2).padStart(5, '0')}`; };
 const getJSON = async u => { try { const r = await fetch(u, { cache: 'no-store' }); return r.ok ? await r.json() : null; } catch (e) { return null; } };
 const getText = async u => { try { const r = await fetch(u, { cache: 'no-store' }); return r.ok ? await r.text() : ''; } catch (e) { return ''; } };
@@ -46,8 +84,8 @@ const TEST = new URLSearchParams(location.search).has('lyrics'); let saveTimer =
 const timedCount = arr => arr.filter(l => l.t0 >= 0 && l.t1 > l.t0).length;
 function autosave() { if (TEST) return; clearTimeout(saveTimer); saveTimer = setTimeout(async () => {
   try { const r = await fetch(`/api/save?project=${PROJECT}&file=lyrics.json`, { method: 'POST', body: JSON.stringify({ savedAt: new Date().toISOString(), audio: song.audio, lines }, null, 1) });
-    $('#status').textContent = r.ok ? `已自動儲存 ✓ ${timedCount(lines)}/${lines.length}` : '⚠ 自動儲存失敗：伺服器沒有回應'; }
-  catch (e) { $('#status').textContent = '⚠ 自動儲存失敗：伺服器沒有開（進度暫存在這個瀏覽器）'; } }, 500); }
+    r.ok ? setStatus('autosaved', timedCount(lines), lines.length) : setStatus('autosaveNoResp'); }
+  catch (e) { setStatus('autosaveDown'); } }, 500); }
 function render() {
   const tb = $('#rows'); tb.innerHTML = '';
   lines.forEach((l, i) => {
@@ -60,14 +98,14 @@ function render() {
     tr.onclick = e => { if (e.target.tagName === 'INPUT') return; select(i, true); };
     tb.appendChild(tr);
   });
-  $('#cur').textContent = lines[cur] ? `第 ${cur + 1} 句：${lines[cur].ja}` : (lines.length ? '全部完成，記得儲存' : '');
+  $('#cur').textContent = lines[cur] ? tr('curLine', cur + 1, lines[cur].ja) : (lines.length ? tr('allDone') : '');
 }
 let stopAt = null;
 function select(i, seek) { cur = Math.max(0, Math.min(lines.length, i)); if (seek && lines[cur]) { const prev = lines[cur - 1]; audio.currentTime = Math.max(0, (lines[cur].t0 >= 0 ? lines[cur].t0 : prev && prev.t1 >= 0 ? prev.t1 : audio.currentTime) - 1.5); } render(); }
 
 async function loadAudio() {
   audio = new Audio(song.audio); audio.preload = 'auto';
-  audio.addEventListener('error', () => { $('#msg').innerHTML = `<p class="empty">找不到音訊檔 <b>${song.audio}</b>：請把歌曲放到 projects/${PROJECT}/audio/，並在 song.json 設定檔名。</p>`; });
+  audio.addEventListener('error', () => setMsg('noAudio', song.audio, PROJECT));
   try {
     const buf = await (await fetch(song.audio)).arrayBuffer(); const ac = new (window.AudioContext || window.webkitAudioContext)();
     const ab = await ac.decodeAudioData(buf); dur = ab.duration; const ch = ab.getChannelData(0), n = 4000, step = Math.floor(ch.length / n); peaks = new Float32Array(n);
@@ -89,7 +127,7 @@ function seekFromCanvas(cv, e, t0, t1) { const r = cv.getBoundingClientRect(); a
 $('#overview').onclick = e => seekFromCanvas($('#overview'), e, 0, dur || 300);
 $('#detail').onclick = e => { const t = audio.currentTime; seekFromCanvas($('#detail'), e, t - 6, t + 6); };
 
-function tick() { if (audio) { $('#time').textContent = fmt(audio.currentTime); if (stopAt && audio.currentTime > stopAt) { audio.pause(); stopAt = null; } $('#play').textContent = audio.paused ? '▶ 播放' : '❚❚ 暫停'; } drawWaves(); requestAnimationFrame(tick); }
+function tick() { if (audio) { $('#time').textContent = fmt(audio.currentTime); if (stopAt && audio.currentTime > stopAt) { audio.pause(); stopAt = null; } $('#play').textContent = tr(audio.paused ? 'play' : 'pause'); } drawWaves(); requestAnimationFrame(tick); }
 const lag = () => +$('#lag').value || 0;
 addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
@@ -106,25 +144,26 @@ $('#back').onclick = () => audio.currentTime = Math.max(0, audio.currentTime - 2
 document.querySelectorAll('[data-rate]').forEach(b => b.onclick = () => { audio.playbackRate = +b.dataset.rate; document.querySelectorAll('[data-rate]').forEach(x => x.classList.toggle('on', x === b)); });
 async function importTxt(keepTimes) {
   const parsed = parseLyrics(await getText(BASE + (new URLSearchParams(location.search).get('lyrics') || 'lyrics.txt')));
-  if (!parsed.length) { $('#msg').innerHTML = '<p class="empty">lyrics.txt 裡還沒有歌詞：把歌詞貼進 projects/${PROJECT}/lyrics.txt 存檔後，按「從 lyrics.txt 重新匯入」。</p>'; return; }
-  $('#msg').innerHTML = '';
+  if (!parsed.length) { setMsg('noLyrics', PROJECT); return; }
+  setMsg(null);
   lines = parsed.map((p, i) => ({ t0: keepTimes && lines[i] ? lines[i].t0 : -1, t1: keepTimes && lines[i] ? lines[i].t1 : -1, ja: p.ja, zh: p.zh })); cur = lines.findIndex(l => !(l.t0 >= 0)); if (cur < 0) cur = 0; render();
 }
 $('#reimport').onclick = () => importTxt(true);
+$('#lang').onclick = () => { LANG = LANG === 'zh' ? 'en' : 'zh'; store('timing-lang', LANG); const u = new URL(location.href); u.searchParams.set('lang', LANG); history.replaceState(null, '', u); applyLang(); };
 $('#save').onclick = async () => {
-  const bad = lines.findIndex(l => !(l.t0 >= 0 && l.t1 > l.t0)); if (bad >= 0 && !confirm(`第 ${bad + 1} 句還沒有時間，確定要先存嗎？`)) return;
+  const bad = lines.findIndex(l => !(l.t0 >= 0 && l.t1 > l.t0)); if (bad >= 0 && !confirm(tr('confirmUntimed', bad + 1))) return;
   const r = await fetch(`/api/save?project=${PROJECT}&file=lyrics.json`, { method: 'POST', body: JSON.stringify({ savedAt: new Date().toISOString(), audio: song.audio, lines }, null, 1) });
-  $('#status').textContent = r.ok ? '已儲存 ✓ ' + new Date().toLocaleTimeString() : '儲存失敗';
+  r.ok ? setStatus('saved', new Date().toLocaleTimeString()) : setStatus('saveFailed');
 };
 (async () => {
   Object.assign(song, (await getJSON(BASE + 'song.json')) || {});
-  song.audio = BASE + song.audio; document.getElementById('title').textContent = '歌詞對時間 · ' + (song.title || PROJECT);
+  song.audio = BASE + song.audio; applyLang();
   const qp = new URLSearchParams(location.search); if (qp.get('audio')) song.audio = BASE + qp.get('audio');   // ?audio= / ?lyrics= for testing
   await loadAudio();
   const saved = TEST ? null : await getJSON(BASE + 'lyrics.json'), d = TEST ? null : draft(false);
   const sv = saved && saved.lines && saved.lines.length ? saved.lines : null;
-  if (d && d.length && (!sv || timedCount(d) > timedCount(sv))) { lines = d; $('#status').textContent = `已從這個瀏覽器救回 ${timedCount(d)} 句`; autosave(); }
-  else if (sv) { lines = sv; $('#status').textContent = `已載入 lyrics.json（${timedCount(sv)}/${sv.length} 句有時間）`; }
+  if (d && d.length && (!sv || timedCount(d) > timedCount(sv))) { lines = d; setStatus('rescued', timedCount(d)); autosave(); }
+  else if (sv) { lines = sv; setStatus('loaded', timedCount(sv), sv.length); }
   else await importTxt(false);
   cur = lines.findIndex(l => !(l.t0 >= 0)); if (cur < 0) cur = 0; render(); tick();
 })();

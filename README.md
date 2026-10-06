@@ -68,7 +68,7 @@ node tools/server.mjs
 | `projects/_brand/` | repo 的 icon 和社群預覽圖（`tools/make_brand.sh` 重新產生） |
 | `tools/` | 伺服器、渲染、分段渲染、合成、節奏分析、人聲分析、歌詞合併、從歌詞影片讀時間 |
 | `studio.html` | 預覽與渲染用的頁面 |
-| `timing.html` | 邊聽邊按空白鍵的對時間工具 |
+| `timing.html` | 邊聽邊按空白鍵的對時間工具（中英介面切換） |
 
 ## 版權
 

@@ -1,0 +1,7 @@
+{
+ "source": "how the times were found (tap tool, lyric-video scan, by hand ...)",
+ "lines": [
+  {"t0": 8.0, "t1": 14.5},
+  {"t0": 16.0, "t1": 22.5, "parts": [[16.0, 18.8], [19.6, 22.5]]}
+ ]
+}
