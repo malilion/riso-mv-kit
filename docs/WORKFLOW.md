@@ -1,3 +1,5 @@
+<p align="right"><b>中文</b> · <a href="WORKFLOW.en.md">English</a></p>
+
 # 製作流程：從一首歌到一支 MV
 
 以下用 `my-song` 當專案名稱。所有指令都在 repo 根目錄執行。

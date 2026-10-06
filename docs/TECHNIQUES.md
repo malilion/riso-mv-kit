@@ -1,3 +1,5 @@
+<p align="right"><b>中文</b> · <a href="TECHNIQUES.en.md">English</a></p>
+
 # 技巧與模式
 
 這份文件說明這套 MV 的畫面是怎麼做出來的，以及做新場景時可以沿用的寫法。每一節都標了對應的程式位置。

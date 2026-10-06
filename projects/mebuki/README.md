@@ -1,4 +1,8 @@
+<p align="right"><a href="#中文">中文</a> · <a href="#english">English</a></p>
+
 # 範例：「芽吹の唄」紙上萌芽繪本 MV
+
+## 中文
 
 「芽吹の唄」（作詞・作曲・歌：大原ゆい子，編曲：MANYO；《無職轉生》第三季 OP2）的 MV。313.7 秒，137 BPM，第一個重拍在 0.948 秒，整首以 8 小節為一個樂句。
 
@@ -19,7 +23,7 @@
    ./tools/render_chunks.sh mebuki
    ```
 
-## 分鏡
+### 分鏡
 
 | 時間 | 段落 | 場景 | 畫面 |
 |---|---|---|---|
@@ -41,6 +45,55 @@
 | 4:43 | 第 21–22 句 | `sc_finalRoad` | 回到同一條路，這次一路印到地平線，鏡頭升高 |
 | 5:04 | 尾奏 | `sc_fin` | おわり 與製作名單 |
 
-## 時間怎麼來的
+### 時間怎麼來的
 
 `timing.json` 的每句開始時間，取自一支同音源的歌詞影片：用 `tools/video-lyric-scan.js` 讀出每次換字幕的時間，再用墨量和字數比對每句的順序。唱完時間和句中換氣則用 `tools/vocal.mjs` 判斷。字幕同時顯示兩句的地方，依 8 小節樂句和人聲起音拆開：197.2 秒、225.2 秒。
+
+---
+
+## English
+
+A music video for 「芽吹の唄」 (lyrics, music and vocals: 大原ゆい子 / Yuiko Ohara; arrangement: MANYO; the second opening of *Mushoku Tensei* season 3). 313.7 seconds at 137 bpm, first downbeat at 0.948 s, built from 8-bar phrases.
+
+This folder holds only code and timings. **The audio and the lyrics are not in the repo.** To rebuild the video:
+
+1. Put a legally obtained recording at `audio/song.mp3`. The timings match the 313.7-second version; with a different recording, time the lyrics again.
+2. Paste the lyrics (a Japanese line, then its translation on the next line) into `lyrics.txt`.
+3. Run:
+
+   ```bash
+   node tools/make_lyrics.mjs mebuki
+   ```
+
+4. Preview: <http://localhost:8766/studio.html?project=mebuki&play>
+5. Render the whole song:
+
+   ```bash
+   ./tools/render_chunks.sh mebuki
+   ```
+
+### Storyboard
+
+| Time | Section | Scene | Picture |
+|---|---|---|---|
+| 0:00 | line 1, first half | `sc_cover` | The picture-book cover prints itself one colour at a time |
+| 0:08 | lines 1–3 | `sc_road` | A country road that keeps going; from line 2 the distance turns into unprinted pencil sketch |
+| 0:29 | line 4 | `sc_clock` | The little clock planet: the two walk its rim, one turn a day |
+| 0:43 | line 5 | `sc_days` | The same morning again and again, laid out like a calendar; the potted sprout grows a little each day |
+| 0:57 | chorus, line 6 | `sc_sprout` → `sc_field` | A seed breaks the soil and its seed leaves open on the downbeat of bar 33; then the whole field sprouts row by row |
+| 1:11 | line 7 | `sc_together` | A hilltop at sunset, the two side by side while a young tree grows between them |
+| 1:25 | interlude | `sc_chapter2` | Chapter page "二" |
+| 1:39 | lines 8–9 | `sc_lineage` | A long chain of people holding hands; the past is only pencilled in, leading to the two in full ink |
+| 2:07 | lines 10–11 | `sc_umbrella` | Holding an umbrella over a seedling in the rain, until the rain stops |
+| 2:35 | second chorus, line 12 | `sc_bloom` | The field bursts into flower |
+| 2:49 | line 13 | `sc_world` | The clock planet again, now covered in trees and flowers, as the camera pulls away |
+| 3:01 | bridge, lines 14–15 | `sc_treasures` | Treasures fill the page one per beat, then faster and faster |
+| 3:29 | lines 16–17 | `sc_rays` | Sunlight falling through a gap in the clouds |
+| 3:59 | line 18 | `sc_memories` | Earlier pages flick past as small cards |
+| 4:15 | lines 19–20 | `sc_night` | Night rain; the two shelter under a tree as sprouts light up around them one by one |
+| 4:43 | lines 21–22 | `sc_finalRoad` | The same road as the beginning, now printed all the way to the horizon, as the camera rises |
+| 5:04 | outro | `sc_fin` | おわり (The End) and the credits |
+
+### Where the timings come from
+
+The start of every line in `timing.json` comes from a lyric video of the same recording: `tools/video-lyric-scan.js` read the time of each subtitle change, and the ink per subtitle compared with each line's length confirmed the order. Line endings and mid-line breaths came from `tools/vocal.mjs`. Where one subtitle showed two lines, they were split on the 8-bar phrase and the vocal onset, at 197.2 s and 225.2 s.

@@ -53,7 +53,7 @@ node tools/server.mjs
 ./tools/new_project.sh my-song
 ```
 
-接著把歌放進 `projects/my-song/audio/song.mp3`、歌詞貼進 `projects/my-song/lyrics.txt`，再依照 **[docs/WORKFLOW.md](docs/WORKFLOW.md)** 一步步做：
+接著把歌放進 `projects/my-song/audio/song.mp3`、歌詞貼進 `projects/my-song/lyrics.txt`，再依照 **[docs/WORKFLOW.md](docs/WORKFLOW.md)**（[English](docs/WORKFLOW.en.md)）一步步做：
 
 1. 分析節奏
 2. 取得歌詞時間
@@ -62,7 +62,7 @@ node tools/server.mjs
 5. 分段渲染
 6. 合成影片
 
-做法和原理寫在 **[docs/TECHNIQUES.md](docs/TECHNIQUES.md)**：印刷引擎、網點、套色錯位、一拍二、植物生長、偽 3D 道路、直書歌詞、翻頁、鉛筆稿淡出、回憶卡片、節奏與人聲分析、從歌詞影片讀時間等等。
+做法和原理寫在 **[docs/TECHNIQUES.md](docs/TECHNIQUES.md)**（[English](docs/TECHNIQUES.en.md)）：印刷引擎、網點、套色錯位、一拍二、植物生長、偽 3D 道路、直書歌詞、翻頁、鉛筆稿淡出、回憶卡片、節奏與人聲分析、從歌詞影片讀時間等等。
 
 ### 資料夾
 
@@ -138,7 +138,7 @@ Put the song at `projects/my-song/audio/song.mp3` and the lyrics in `projects/my
 4. **Preview**: `studio.html?project=my-song&play`
 5. **Render**: `./tools/render_chunks.sh my-song` renders, encodes and deletes frames in chunks so a full song never fills the disk. It writes `video/my-song.mp4` and a smaller `video/my-song_share.mp4`.
 
-The step-by-step guide ([docs/WORKFLOW.md](docs/WORKFLOW.md)) and the explanation of every technique ([docs/TECHNIQUES.md](docs/TECHNIQUES.md)) are written in Traditional Chinese for now. The code comments are in English.
+Step by step: **[docs/WORKFLOW.en.md](docs/WORKFLOW.en.md)**. How every technique works: **[docs/TECHNIQUES.en.md](docs/TECHNIQUES.en.md)**, covering the print engine, halftones, misregistration, animating on twos, seedling growth, the pseudo-3D road, vertical lyrics, page turns, the pencil fade, memory cards, tempo and vocal analysis, and reading timing from lyric videos.
 
 ### Layout
 
