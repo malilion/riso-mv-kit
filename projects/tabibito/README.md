@@ -6,6 +6,8 @@
 
 <p align="center"><a href="../../assets/previews/tabibito.mp4"><img src="../../assets/previews/tabibito.webp" width="640" alt="「旅人の唄」MV 精華（無聲、無歌詞）"></a></p>
 
+<p align="center"><a href="https://www.youtube.com/watch?v=dKygHuqjtfA">▶ 在 YouTube 看完整版</a></p>
+
 和「芽吹の唄」不同，這支只有一個主角：戴草帽的旅人，加上一隻藍色小鳥。旅人和小鳥都由這個資料夾的 `scenes.js` 畫出來（`TRAV`、`bird()`），山、浮島、天燈、打勾勾的手等素材也在同一個檔案。
 
 這個資料夾只有程式和時間表。**音檔和歌詞不在 repo 裡**，要重現的話：

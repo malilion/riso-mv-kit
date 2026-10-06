@@ -4,6 +4,8 @@
 
 A music video for 「芽吹の唄」 (lyrics, music and vocals: 大原ゆい子 / Yuiko Ohara; arrangement: MANYO; the second opening of *Mushoku Tensei* season 3). 313.7 seconds at 137 bpm, first downbeat at 0.948 s, built from 8-bar phrases.
 
+<p align="center"><a href="https://www.youtube.com/watch?v=cIGoCLQ7_Uk">▶ Watch the full video on YouTube</a></p>
+
 This folder holds only code and timings. **The audio and the lyrics are not in the repo.** To rebuild the video:
 
 1. Put a legally obtained recording at `audio/song.mp3`. The timings match the 313.7-second version; with a different recording, time the lyrics again.

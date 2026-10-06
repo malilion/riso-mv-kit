@@ -6,6 +6,8 @@ An MV for 「旅人の唄」 (words, music and vocals: Yuiko Ohara, arrangement:
 
 <p align="center"><a href="../../assets/previews/tabibito.mp4"><img src="../../assets/previews/tabibito.webp" width="640" alt="「旅人の唄」 MV highlights (silent, no lyrics)"></a></p>
 
+<p align="center"><a href="https://www.youtube.com/watch?v=dKygHuqjtfA">▶ Watch the full video on YouTube</a></p>
+
 Unlike 「芽吹の唄」, this one has a single lead: a traveller in a straw hat, with a small blue bird. Both are drawn in this folder's `scenes.js` (`TRAV`, `bird()`), together with the mountains, the floating island, the lanterns and the hooked little fingers.
 
 This folder holds only code and a timing table. **The audio and the lyrics are not in the repo.** To reproduce it:

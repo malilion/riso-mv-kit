@@ -16,7 +16,7 @@ Two MVs have been made with it so far; their storyboards and all of their scenes
 
 ## Works
 
-Highlights from both MVs, **without sound and without lyrics** (the songs and lyrics belong to their authors and are not in this repo). Click a picture for a sharper mp4.
+Highlights from both MVs, **without sound and without lyrics** (the songs and lyrics belong to their authors and are not in this repo). Click a picture for a sharper mp4; the full videos (with music and lyrics) are on YouTube.
 
 <table>
 <tr>
@@ -24,8 +24,8 @@ Highlights from both MVs, **without sound and without lyrics** (the songs and ly
 <td width="50%" valign="top"><a href="assets/previews/tabibito.mp4"><img src="assets/previews/tabibito.webp" alt="「旅人の唄」 MV highlights (silent, no lyrics)"></a></td>
 </tr>
 <tr>
-<td valign="top"><b>「芽吹の唄」</b> (Mushoku Tensei S3, second opening)<br>5:14. Two travellers in a paper world that sprouts: a country road, a clock-world, a whole field popping up on the downbeat.<br><a href="projects/mebuki/README.en.md">Storyboard and code →</a></td>
-<td valign="top"><b>「旅人の唄」</b> (Mushoku Tensei S1 ending)<br>4:24. One traveller and a small bird: a mountain, a spring, an island above the clouds, a campfire dream, a pinky promise, lanterns.<br><a href="projects/tabibito/README.en.md">Storyboard and code →</a></td>
+<td valign="top"><b>「芽吹の唄」</b> (Mushoku Tensei S3, second opening)<br>5:14. Two travellers in a paper world that sprouts: a country road, a clock-world, a whole field popping up on the downbeat.<br><a href="https://www.youtube.com/watch?v=cIGoCLQ7_Uk">▶ Full video on YouTube</a> · <a href="projects/mebuki/README.en.md">Storyboard and code →</a></td>
+<td valign="top"><b>「旅人の唄」</b> (Mushoku Tensei S1 ending)<br>4:24. One traveller and a small bird: a mountain, a spring, an island above the clouds, a campfire dream, a pinky promise, lanterns.<br><a href="https://www.youtube.com/watch?v=dKygHuqjtfA">▶ Full video on YouTube</a> · <a href="projects/tabibito/README.en.md">Storyboard and code →</a></td>
 </tr>
 </table>
 

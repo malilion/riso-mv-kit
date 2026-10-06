@@ -16,7 +16,7 @@
 
 ## 作品
 
-下面是兩支 MV 的精華片段，**沒有聲音、也沒有歌詞**（歌曲和歌詞的版權屬於原作者，不放進 repo）。點圖片可以看較清楚的 mp4 版本。
+下面是兩支 MV 的精華片段，**沒有聲音、也沒有歌詞**（歌曲和歌詞的版權屬於原作者，不放進 repo）。點圖片可以看較清楚的 mp4 版本，完整版（含音樂與歌詞）在 YouTube。
 
 <table>
 <tr>
@@ -24,8 +24,8 @@
 <td width="50%" valign="top"><a href="assets/previews/tabibito.mp4"><img src="assets/previews/tabibito.webp" alt="「旅人の唄」MV 精華（無聲、無歌詞）"></a></td>
 </tr>
 <tr>
-<td valign="top"><b>「芽吹の唄」</b>（《無職轉生》第三季 OP2）<br>5:14。兩個旅人走在會發芽的紙上世界：鄉間路、時鐘小星球、整片田在重拍上冒芽。<br><a href="projects/mebuki/">分鏡與程式 →</a></td>
-<td valign="top"><b>「旅人の唄」</b>（《無職轉生》第一季 ED）<br>4:24。一個旅人和一隻小鳥：翻山、泉水、雲海上的浮島、營火的夢、打勾勾、天燈。<br><a href="projects/tabibito/">分鏡與程式 →</a></td>
+<td valign="top"><b>「芽吹の唄」</b>（《無職轉生》第三季 OP2）<br>5:14。兩個旅人走在會發芽的紙上世界：鄉間路、時鐘小星球、整片田在重拍上冒芽。<br><a href="https://www.youtube.com/watch?v=cIGoCLQ7_Uk">▶ YouTube 完整版</a> · <a href="projects/mebuki/">分鏡與程式 →</a></td>
+<td valign="top"><b>「旅人の唄」</b>（《無職轉生》第一季 ED）<br>4:24。一個旅人和一隻小鳥：翻山、泉水、雲海上的浮島、營火的夢、打勾勾、天燈。<br><a href="https://www.youtube.com/watch?v=dKygHuqjtfA">▶ YouTube 完整版</a> · <a href="projects/tabibito/">分鏡與程式 →</a></td>
 </tr>
 </table>
 
