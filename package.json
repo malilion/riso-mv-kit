@@ -13,7 +13,7 @@
     "chunks": "zsh tools/render_chunks.sh"
   },
   "keywords": ["music-video", "risograph", "halftone", "canvas", "webgl", "picture-book", "lyrics"],
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "puppeteer-core": "^25.12.0"
   }
