@@ -96,3 +96,8 @@ node tools/server.mjs
 ## 來源與授權
 
 程式碼採 MIT License（© 2026 Malilion）；參考專案的 ISC 授權聲明保留於 LICENSE。逐格渲染加 FFmpeg 合成的流程，參考自 [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version)（ISC）與 [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo)（package.json 標示 ISC），原授權聲明保留在 [LICENSE](LICENSE)。引擎、場景和工具由 Claude（Anthropic）與 malilion 一起製作。字型使用 Google Fonts 的 Klee One 與 LXGW WenKai TC（SIL OFL）。
+
+---
+
+<!-- malilion-ecosystem-footer -->
+<p align="center"><sub>🦁 碼力獅 <a href="https://github.com/malilion">MaliLion</a> 生態系的一員 · <a href="https://malilion.com">malilion.com</a> · <a href="https://github.com/malilion?tab=repositories">更多作品</a></sub></p>

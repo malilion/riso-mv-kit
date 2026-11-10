@@ -100,3 +100,8 @@ Songs, lyrics and translations belong to their authors and are **never** committ
 ## Credits and license
 
 MIT License (© 2026 Malilion); upstream ISC notices are retained in LICENSE. The render-in-Chrome-then-encode-with-FFmpeg approach comes from [2606156052/Pdoom-video-anime-version](https://github.com/2606156052/Pdoom-video-anime-version) (ISC) and [JohnHeibel/PDoomVideo](https://github.com/JohnHeibel/PDoomVideo) (ISC as declared in its package.json); their notices are kept in [LICENSE](LICENSE). The engine, scenes and tools were made by Claude (Anthropic) together with malilion. Fonts: Klee One and LXGW WenKai TC from Google Fonts (SIL OFL).
+
+---
+
+<!-- malilion-ecosystem-footer -->
+<p align="center"><sub>🦁 Part of the <a href="https://github.com/malilion">MaliLion</a> ecosystem · <a href="https://malilion.com">malilion.com</a> · <a href="https://github.com/malilion?tab=repositories">More projects</a></sub></p>
